@@ -1,0 +1,3 @@
+[submodule "lib/c/vendor/glfw"]
+	path = lib/c/vendor/glfw
+	url = https://github.com/deakodev/glfw.git
