@@ -1,0 +1,59 @@
+(data_only_dirs vendor)
+
+(rule
+ (targets lib_flags.sexp)
+ (deps
+  (:discover config/discover.exe))
+ (action
+  (run %{discover})))
+
+(rule
+ (alias build-glfw)
+ (targets libglfw.a dllglfw.so)
+ (enabled_if
+  (or
+   (= %{system} linux)
+   (= %{system} linux_elf)
+   (= %{system} elf)))
+ (deps
+  (source_tree vendor/glfw))
+ (action
+  (no-infer
+   (progn
+    ;; Make writable in case submodules are read-only
+    (run chmod -R +w vendor/glfw)
+    ;; Make a fresh build directory
+    (run rm -rf vendor/glfw/build-static)
+    (run mkdir -p vendor/glfw/build-static)
+    ;; Build static library
+    (chdir
+     vendor/glfw/build-static
+     (progn
+      (run
+       cmake
+       ../
+       -DGLFW_BUILD_WAYLAND=OFF
+       -DBUILD_SHARED_LIBS=OFF
+       -DGLFW_BUILD_EXAMPLES=OFF
+       -DGLFW_BUILD_TESTS=OFF
+       -DGLFW_BUILD_DOCS=OFF)
+      (run cmake --build . -j)))
+    ;; Copy static output
+    (copy vendor/glfw/build-static/src/libglfw3.a libglfw.a)
+    ;; Clean up and build shared library
+    (run rm -rf vendor/glfw/build-shared)
+    (run mkdir -p vendor/glfw/build-shared)
+    (chdir
+     vendor/glfw/build-shared
+     (progn
+      (run
+       cmake
+       ../
+       -DGLFW_BUILD_WAYLAND=OFF
+       -DBUILD_SHARED_LIBS=ON
+       -DGLFW_BUILD_EXAMPLES=OFF
+       -DGLFW_BUILD_TESTS=OFF
+       -DGLFW_BUILD_DOCS=OFF)
+      (run cmake --build . -j)))
+    ;; Copy shared output as dllglfw.so
+    (copy vendor/glfw/build-shared/src/libglfw.so dllglfw.so)))))

@@ -1,14 +1,14 @@
 opam-version: "2.0"
-synopsis: "OCaml-C Game Engine"
-description: "OCaml-C Game Engine"
+synopsis: "OCaml-C bindings for glfw"
+description: "OCaml-C bindings for glfw"
 maintainer: ["deakodev@outlook.com"]
 authors: ["Zachary Deak"]
-license: "Apache-2.0"
-homepage: "https://github.com/deakodev/bedbug"
-bug-reports: "https://github.com/deakodev/bedbug/issues"
+license: "MIT"
+homepage: "https://github.com/deakodev/surf"
+bug-reports: "https://github.com/deakodev/surf/issues"
 depends: [
-  "ocaml" {>= "4.05"}
   "dune" {>= "3.17"}
+  "ocaml" {>= "4.05"}
   "ctypes" {>= "0.14"}
   "odoc" {with-doc}
 ]
@@ -26,5 +26,5 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/deakodev/bedbug.git"
+dev-repo: "git+https://github.com/deakodev/surf.git"
 available: [arch != "arm32" & arch != "ppc64"]
