@@ -1,6 +1,25 @@
-(library 
+(library
  (name glfw)
- (package surf))
- ; (ctypes
- ;  (external_library_name glfw)
- ;  ))
+ (package surf)
+ (ctypes
+  (external_library_name glfw)
+  (build_flags_resolver
+   (vendored
+    (c_flags
+     :standard
+     "-I../vendor/glfw/include/GLFW"
+     "-I../vendor/glfw/src")
+    (c_library_flags :standard)))
+  (headers
+   (include "glfw3.h" "glfw3native.h"))
+  (type_description
+   (instance Types)
+   (functor Types))
+  (function_description
+   (instance Functions)
+   (functor Functions))
+  (generated_types Glfw_types_generated)
+  (generated_entry_point Glfw_generated))
+ (library_flags
+  (:include ../lib_flags.sexp))
+ (foreign_archives ../glfw))
