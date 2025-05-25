@@ -1,4 +1,4 @@
 (library
  (name surf)
  (public_name surf)
- (libraries glfw))
+ (libraries glfw base stdio))

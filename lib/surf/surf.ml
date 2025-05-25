@@ -1,8 +1,8 @@
-include Glfw.Functions
-include Glfw.Types
+open Surf_glfw
 
-type 'a abstract = 'a Ctypes.abstract
-type 'a ptr = 'a abstract Ctypes_static.ptr
-
-let null_monitor = Ctypes.from_voidp GLFWmonitor.t Ctypes.null
-let null_window = Ctypes.from_voidp GLFWwindow.t Ctypes.null
+let window_init width height title =
+  if glfw_init () = 1 then
+    match glfw_create_window width height title None None with
+    | Some _ -> Stdio.printf "Window created!\n%!"
+    | None -> raise (Failure "Failed to create window!")
+  else raise (Failure "GLFW init failed!")
