@@ -1,5 +1,6 @@
 include Glfw.Functions
 include Glfw.Types
+include Glfw.Defines
 
 let null_monitor = Ctypes.from_voidp GLFWmonitor.t Ctypes.null
 let null_window = Ctypes.from_voidp GLFWwindow.t Ctypes.null

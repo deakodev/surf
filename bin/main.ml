@@ -7,5 +7,6 @@ let run () =
   done
 
 let () =
-  Surf.window_init 640 480 "Hello";
+  Surf.window_init
+    { width = 640; height = 480; title = "Surf"; graphics_api = Vulkan };
   run ()
