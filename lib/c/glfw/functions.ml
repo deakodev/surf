@@ -10,8 +10,8 @@ module Functions (F : Ctypes.FOREIGN) = struct
 
   let glfw_create_window =
     foreign "glfwCreateWindow"
-      (int @-> int @-> string @-> ptr GLFWmonitor.t @-> ptr GLFWwindow.t
-      @-> returning (ptr GLFWwindow.t))
+      (int @-> int @-> string @-> GLFWmonitor.t_typ @-> GLFWwindow.t_typ
+     @-> returning GLFWwindow.t_typ)
 
   let glfw_error_callback =
     Foreign.funptr Ctypes_static.(int @-> string @-> returning void)
@@ -20,11 +20,11 @@ module Functions (F : Ctypes.FOREIGN) = struct
     foreign "glfwSetErrorCallback" (glfw_error_callback @-> returning void)
 
   let glfw_window_close_callback =
-    Foreign.funptr Ctypes_static.(ptr GLFWwindow.t @-> returning void)
+    Foreign.funptr Ctypes_static.(GLFWwindow.t_typ @-> returning void)
 
   let glfw_set_window_close_callback =
     foreign "glfwSetWindowCloseCallback"
-      (ptr GLFWwindow.t @-> glfw_window_close_callback @-> returning void)
+      (GLFWwindow.t_typ @-> glfw_window_close_callback @-> returning void)
 
   let glfw_poll_events = foreign "glfwPollEvents" (void @-> returning void)
 end

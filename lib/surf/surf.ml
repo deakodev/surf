@@ -21,7 +21,7 @@ let running = ref true
 
 let window_callbacks_set window =
   let close_callback _ =
-    Echo.trace "Closing";
+    Echo.trace "Closing window...\n%!";
     running := false
   in
   glfw_set_window_close_callback window close_callback
