@@ -25,4 +25,5 @@
   (ctypes
    (>= 0.14))
   base
-  stdio))
+  stdio
+  echo))

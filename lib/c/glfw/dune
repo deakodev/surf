@@ -22,4 +22,5 @@
   (generated_entry_point Glfw_generated))
  (library_flags
   (:include ../lib_flags.sexp))
- (foreign_archives ../glfw))
+ (foreign_archives ../glfw)
+ (libraries ctypes-foreign))
