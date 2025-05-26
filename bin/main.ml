@@ -1,10 +1,9 @@
 (* open Base *)
 (* open Stdio *)
 
-let run () =
-  while true do
-    ()
-  done
+let rec run () =
+  Surf.window_poll_events ();
+  match Surf.window_should_close () with true -> () | false -> run ()
 
 let () =
   Surf.window_init

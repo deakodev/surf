@@ -17,11 +17,25 @@ let error_callback code desc =
   let error = glfw_error_code_to_string code in
   Echo.error "[%s]: %s\n%!" error desc
 
+let running = ref true
+
+let window_callbacks_set window =
+  let close_callback _ =
+    Echo.trace "Closing";
+    running := false
+  in
+  glfw_set_window_close_callback window close_callback
+
 let window_init { width; height; title; graphics_api } =
   if glfw_init () = 1 then (
     graphics_api_hint graphics_api;
     glfw_set_error_callback error_callback;
     match glfw_create_window width height title None None with
-    | Some _ -> Stdio.printf "Window created!\n%!"
+    | Some window ->
+        Stdio.printf "Window created!\n%!";
+        window_callbacks_set window
     | None -> raise (Failure "Failed to create window!"))
   else raise (Failure "GLFW init failed!")
+
+let window_should_close () = not !running
+let window_poll_events () = glfw_poll_events ()

@@ -8,3 +8,5 @@ type window_desc = {
 }
 
 val window_init : window_desc -> unit
+val window_should_close : unit -> bool
+val window_poll_events : unit -> unit
