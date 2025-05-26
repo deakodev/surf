@@ -27,4 +27,9 @@ module Functions (F : Ctypes.FOREIGN) = struct
       (GLFWwindow.t_typ @-> glfw_window_close_callback @-> returning void)
 
   let glfw_poll_events = foreign "glfwPollEvents" (void @-> returning void)
+
+  let glfw_destroy_window =
+    foreign "glfwDestroyWindow" (GLFWwindow.t_typ @-> returning void)
+
+  let glfw_terminate = foreign "glfwTerminate" (void @-> returning void)
 end

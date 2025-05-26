@@ -5,6 +5,10 @@ val window_init : Surf_window.desc -> Surf_window.t
     This sets required glfw window hints and callbacks. If the window cannot be
     created or GLFW initialization fails, it raises a [Failure]. *)
 
+val window_close : Surf_window.t -> unit
+(** [window_close window] closes the given window and cleans up GLFW resources.
+    After this call, the window is no longer valid. *)
+
 val window_should_close : Surf_window.t -> bool
 (** [window_should_close ()] returns [true] if the glfw window has been
     requested to close. *)

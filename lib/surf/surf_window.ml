@@ -18,12 +18,12 @@ let error_callback code desc =
   let error = glfw_error_code_to_string code in
   Echo.error "[%s]: %s\n%!" error desc
 
-let window_callbacks_set (w : t) =
+let window_callbacks_set window =
   let close_callback _ =
     Echo.info "Closing window...";
-    w.running <- false
+    window.running <- false
   in
-  glfw_set_window_close_callback w.handle close_callback
+  glfw_set_window_close_callback window.handle close_callback
 
 let graphics_api_hint = function
   | OpenGL -> glfw_window_hint glfw_client_api glfw_opengl_api
@@ -42,5 +42,6 @@ let init desc : t =
     | None -> failwith "Failed to create window!")
   else failwith "GLFW init failed!"
 
-let should_close (w : t) = not w.running
+let close window = glfw_shutdown window.handle
+let should_close window = not window.running
 let poll_events () = glfw_poll_events ()

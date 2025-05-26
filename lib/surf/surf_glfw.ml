@@ -10,5 +10,10 @@ let glfw_create_window width height title monitor_opt share_opt =
   in
   if GLFWwindow.is_null window then None else Some window
 
+let glfw_shutdown window =
+  glfw_destroy_window window;
+  glfw_terminate ();
+  Echo.info "Window closed successfully."
+
 type monitor = GLFWmonitor.t
 type window = GLFWwindow.t

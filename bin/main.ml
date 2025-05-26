@@ -3,7 +3,9 @@
 
 let rec run window =
   Surf.window_poll_events ();
-  match Surf.window_should_close window with true -> () | false -> run window
+  match Surf.window_should_close window with
+  | true -> Surf.window_close window
+  | false -> run window
 
 let () =
   let window =
