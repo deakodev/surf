@@ -26,4 +26,5 @@
    (>= 0.14))
   base
   stdio
-  echo))
+  echo
+  glMLite))

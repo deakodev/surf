@@ -1,4 +1,4 @@
 (library
  (name surf)
  (public_name surf)
- (libraries glfw echo base stdio))
+ (libraries glfw glMLite echo base stdio))

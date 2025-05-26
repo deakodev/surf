@@ -10,6 +10,6 @@ let rec run window =
 let () =
   let window =
     Surf.window_init
-      { width = 640; height = 480; title = "Surf"; graphics_api = Vulkan }
+      { width = 640; height = 480; title = "Surf"; graphics_api = OpenGL }
   in
   run window
